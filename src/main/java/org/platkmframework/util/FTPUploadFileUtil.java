@@ -27,6 +27,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
  
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  *   Author: 
  *     Eduardo Iglesias
@@ -35,6 +38,8 @@ import org.apache.commons.net.ftp.FTPClient;
 */
 public class FTPUploadFileUtil {
  
+	private static Logger logger = LoggerFactory.getLogger(FTPUploadFileUtil.class);
+	
 	/**
 	 * description: constructor
 	 */
@@ -62,7 +67,7 @@ public class FTPUploadFileUtil {
  
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);  
             InputStream inputStream = new FileInputStream(file); 
-            System.out.println("Start uploading first file");
+            logger.info("Start uploading first file");
             
             if(StringUtils.isNotBlank(subFolder)) {
 	            if(!ftpClient.changeWorkingDirectory(subFolder)){   
@@ -77,10 +82,10 @@ public class FTPUploadFileUtil {
 		    boolean done = ftpClient.storeFile(file.getName(), inputStream);
 		    inputStream.close();
 		    if (done) {
-		        System.out.println("The first file is uploaded successfully.");
+		    	logger.info("The first file is uploaded successfully.");
 		    }
 		  }catch (IOException ex) {
-	          System.out.println("Error: " + ex.getMessage());
+			  logger.info("Error: " + ex.getMessage());
 	          ex.printStackTrace();
 	      }
 	}

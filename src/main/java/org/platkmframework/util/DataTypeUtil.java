@@ -28,21 +28,25 @@ import org.apache.commons.lang3.StringUtils;
 */
 public class DataTypeUtil {
 	
-	
 	/**
 	 * description: default constructor
 	 */
 	public DataTypeUtil() {
 		super();
 	}
+	
+	public static String getStringValue(Object value, String defaultValue) {
+		return (value != null && StringUtils.isNotBlank(value.toString()))?value.toString():defaultValue; 
+	}
+	
 	/**
 	 * description: convert to int value
 	 * @param value: value
 	 * @param defaultValue :default value
 	 * @return int
 	 */
-	public static int getIntegerValue(String value, int defaultValue) {
-		if(StringUtils.isNotBlank(value)) return Integer.valueOf(value); 
+	public static int getIntegerValue(Object value, int defaultValue) {
+		if( value != null && StringUtils.isNotBlank(value.toString())) return Integer.valueOf(value.toString()); 
 		return defaultValue;
 	}
 	/**
@@ -51,8 +55,8 @@ public class DataTypeUtil {
 	 * @param defaultValue: default value
 	 * @return boolean
 	 */
-	public static Boolean getBooleanValue(String value, boolean defaultValue) {
-		if(StringUtils.isNotBlank(value)) return Boolean.valueOf(value); 
+	public static Boolean getBooleanValue(Object value, boolean defaultValue) {
+		if(value != null && StringUtils.isNotBlank(value.toString())) return Boolean.valueOf(value.toString()); 
 		return defaultValue;
 	}
 

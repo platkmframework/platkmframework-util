@@ -358,7 +358,7 @@ public class ReflectionUtil {
     public static String getAttributeGETmethodName(Field field) throws InvocationException 
     { 
     	if(field != null) 
-    		if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.TYPE)) {
+    		if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.class)) {
     			if(field.getType().isPrimitive()) {
     				return "is" + Util.firstUpperCase(field.getName());
     			}else {
@@ -434,7 +434,7 @@ public class ReflectionUtil {
     		}else{  
     			Object oValue = null;
     			Boolean isEmpty = (value==null || StringUtils.isEmpty(value.toString()));  
-	            if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.TYPE)){
+	            if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.class)){
 	            	if(isEmpty){
 	            		oValue = Boolean.FALSE;
 	            	}else{
@@ -442,7 +442,7 @@ public class ReflectionUtil {
 	            	}
 	        	//}else if(!field.getType().isPrimitive()) {
 	        	//	method.invoke(object, value);  
-	            }else if(field.getType().getName().equals(Byte.class.getName()) || field.getType().isAssignableFrom(Byte.TYPE)){ 
+	            }else if(field.getType().getName().equals(Byte.class.getName()) || field.getType().isAssignableFrom(Byte.class)){ 
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = 0;
@@ -452,7 +452,7 @@ public class ReflectionUtil {
 	            	}else{
 	            		oValue = Byte.valueOf(value.toString());
 	            	} 
-	            }else if(field.getType().getName().equals(Character.class.getName()) || field.getType().isAssignableFrom(Character.TYPE)) {
+	            }else if(field.getType().getName().equals(Character.class.getName()) || field.getType().isAssignableFrom(Character.class)) {
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = "0";
@@ -462,7 +462,7 @@ public class ReflectionUtil {
 	            	}else{
 	            		oValue = Character.valueOf(value.toString().charAt(0));
 	            	} 
-	            }else if (field.getType().getName().equals(Short.class.getName()) ||  field.getType().isAssignableFrom(Short.TYPE)) {
+	            }else if (field.getType().getName().equals(Short.class.getName()) ||  field.getType().isAssignableFrom(Short.class)) {
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = 0;
@@ -472,7 +472,7 @@ public class ReflectionUtil {
 	            	}else{
 	            		oValue = Short.parseShort(value.toString());
 	            	}  
-	            }else if(field.getType().getName().equals(Integer.class.getName()) || field.getType().isAssignableFrom(Integer.TYPE)){ 
+	            }else if(field.getType().getName().equals(Integer.class.getName()) || field.getType().isAssignableFrom(Integer.class)){ 
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = 0;
@@ -482,7 +482,7 @@ public class ReflectionUtil {
 	            	}else{
 	            		oValue = Integer.parseInt(value.toString());
 	            	} 
-	            }else if(field.getType().getName().equals(Long.class.getName()) || field.getType().isAssignableFrom(Long.TYPE)){
+	            }else if(field.getType().getName().equals(Long.class.getName()) || field.getType().isAssignableFrom(Long.class)){
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = 0;
@@ -492,7 +492,7 @@ public class ReflectionUtil {
 	            	}else{
 	            		oValue = Long.parseLong(value.toString());
 	            	}  
-	            }else if(field.getType().getName().equals(Float.class.getName()) || field.getType().isAssignableFrom(Float.TYPE)) {
+	            }else if(field.getType().getName().equals(Float.class.getName()) || field.getType().isAssignableFrom(Float.class)) {
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = 0;
@@ -502,7 +502,7 @@ public class ReflectionUtil {
 	            	}else{
 	            		oValue = Float.parseFloat(value.toString());
 	            	} 
-	            }else if(field.getType().getName().equals(Double.class.getName()) || field.getType().isAssignableFrom(Double.TYPE)) { 
+	            }else if(field.getType().getName().equals(Double.class.getName()) || field.getType().isAssignableFrom(Double.class)) { 
 	            	if(isEmpty){
 	            		if(field.getType().isPrimitive()) {
 	            			oValue = 0;
@@ -535,26 +535,61 @@ public class ReflectionUtil {
     	try 
     	{   
     		 
-            if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.TYPE)){
+            if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.class)){
             	return StringUtils.isEmpty(value.toString())?Boolean.FALSE: Boolean.parseBoolean(value.toString());
         	}else if(!field.getType().isPrimitive()) {
         		return value;  
-            }else if(field.getType().isAssignableFrom(Byte.TYPE))
+            }else if(field.getType().isAssignableFrom(Byte.class) || field.getType().getSimpleName().equalsIgnoreCase(Byte.class.getSimpleName()))
             	return value==null || StringUtils.isEmpty(value.toString())?0: Byte.parseByte(value.toString());
-            else if( field.getType().isAssignableFrom(Character.TYPE))
+            else if( field.getType().isAssignableFrom(Character.class) || field.getType().getSimpleName().equalsIgnoreCase(Character.class.getSimpleName()))
             	return value==null || StringUtils.isEmpty(value.toString())?"": (Character) value;
-            else if ( field.getType().isAssignableFrom(Short.TYPE))
+            else if ( field.getType().isAssignableFrom(Short.class) || field.getType().getSimpleName().equalsIgnoreCase(Short.class.getSimpleName()))
             	return value==null || StringUtils.isEmpty(value.toString())?0: Short.parseShort(value.toString());
-            else if(field.getType().isAssignableFrom(Integer.TYPE))
+            else if(field.getType().isAssignableFrom(Integer.class) || field.getType().getSimpleName().equalsIgnoreCase(Integer.class.getSimpleName()))
             	return value==null || StringUtils.isEmpty(value.toString())?0: Integer.parseInt(value.toString());
-            else if( field.getType().isAssignableFrom(Long.TYPE))
+            else if( field.getType().isAssignableFrom(Long.class) || field.getType().getSimpleName().equalsIgnoreCase(Long.class.getSimpleName()))
             	return value==null || StringUtils.isEmpty(value.toString())?0: Long.parseLong(value.toString());
-            else if(field.getType().isAssignableFrom(Float.TYPE))
+            else if(field.getType().isAssignableFrom(Float.class) || field.getType().getSimpleName().equalsIgnoreCase(Float.class.getSimpleName()))
             	return value==null || StringUtils.isEmpty(value.toString())?0: Float.parseFloat(value.toString());
-            else if(field.getType().isAssignableFrom(Double.TYPE)) 
+            else if(field.getType().isAssignableFrom(Double.class) || field.getType().getSimpleName().equalsIgnoreCase(Double.class.getSimpleName())) 
             	return value==null || StringUtils.isEmpty(value.toString())?0: Double.parseDouble(value.toString());
             
             return null;
+		} catch (SecurityException | IllegalArgumentException e) {
+			//throw new ReflectionError(e.getMessage());
+			LOGGER.log(Level.SEVERE, "-->column not found " + e.getMessage());
+			throw new InvocationException("error reflection value");
+		} 
+    	 
+    }
+    
+    public static Object getRealPrimitiveValue(Class<?>  javaClassType, Object value) throws InvocationException 
+    {
+    	try 
+    	{   
+    		 
+            if(javaClassType.getName().equals(Boolean.class.getName()) || javaClassType.isAssignableFrom(Boolean.class)){
+            	return StringUtils.isEmpty(value.toString())?Boolean.FALSE: Boolean.parseBoolean(value.toString());
+        	}
+            //else if(!javaClassType.isPrimitive()) {
+        //		return value;  
+            //}else 
+            	if(javaClassType.isAssignableFrom(Byte.class))
+            	return value==null || StringUtils.isEmpty(value.toString())?0: Byte.parseByte(value.toString());
+            else if( javaClassType.isAssignableFrom(Character.class))
+            	return value==null || StringUtils.isEmpty(value.toString())?"": (Character) value;
+            else if ( javaClassType.isAssignableFrom(Short.class))
+            	return value==null || StringUtils.isEmpty(value.toString())?0: Short.parseShort(value.toString());
+            else if(javaClassType.isAssignableFrom(Integer.class))
+            	return value==null || StringUtils.isEmpty(value.toString())?0: Integer.parseInt(value.toString());
+            else if( javaClassType.isAssignableFrom(Long.class))
+            	return value==null || StringUtils.isEmpty(value.toString())?0: Long.parseLong(value.toString());
+            else if(javaClassType.isAssignableFrom(Float.class))
+            	return value==null || StringUtils.isEmpty(value.toString())?0: Float.parseFloat(value.toString());
+            else if(javaClassType.isAssignableFrom(Double.class)) 
+            	return value==null || StringUtils.isEmpty(value.toString())?0: Double.parseDouble(value.toString());
+            
+            return value;
 		} catch (SecurityException | IllegalArgumentException e) {
 			//throw new ReflectionError(e.getMessage());
 			LOGGER.log(Level.SEVERE, "-->column not found " + e.getMessage());
@@ -573,18 +608,18 @@ public class ReflectionUtil {
     
         Object returnValue = value;
         if(field != null){
-        	if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.TYPE)){
+        	if(field.getType().getName().equals(Boolean.class.getName()) || field.getType().isAssignableFrom(Boolean.class)){
         	
         		if(value==null || StringUtils.isEmpty(value.toString().trim())) return Boolean.FALSE;
         	
         	}else if(field.getType().isPrimitive() && value==null){
-               if(field.getType().isAssignableFrom(Byte.TYPE) ||
-                        field.getType().isAssignableFrom(Character.TYPE) ||
-                        field.getType().isAssignableFrom(Short.TYPE) ||
-                        field.getType().isAssignableFrom(Integer.TYPE) ||
-                        field.getType().isAssignableFrom(Long.TYPE) ||
-                        field.getType().isAssignableFrom(Float.TYPE) ||
-                        field.getType().isAssignableFrom(Double.TYPE) 
+               if(field.getType().isAssignableFrom(Byte.class) ||
+                        field.getType().isAssignableFrom(Character.class) ||
+                        field.getType().isAssignableFrom(Short.class) ||
+                        field.getType().isAssignableFrom(Integer.class) ||
+                        field.getType().isAssignableFrom(Long.class) ||
+                        field.getType().isAssignableFrom(Float.class) ||
+                        field.getType().isAssignableFrom(Double.class) 
                         
                         ){
                     returnValue = 0;
@@ -593,13 +628,24 @@ public class ReflectionUtil {
             }//byte, char, short, int, long, float, and double.
         }
         
-    
         return returnValue;
     }
     
-    public static Class primitiveToObjectType(Class<?> javaType){
+    public static boolean isPrimitiveType(Class<?> classType){
+    	
+    	return classType.isAssignableFrom(Byte.class) ||
+                classType.isAssignableFrom(Character.class) ||
+                classType.isAssignableFrom(Short.class) ||
+                classType.isAssignableFrom(Integer.class) ||
+                classType.isAssignableFrom(Long.class) ||
+                classType.isAssignableFrom(Float.class) ||
+                classType.isAssignableFrom(Double.class)||
+                classType.isAssignableFrom(Boolean.class);
+    }
+    
+    public static Class<?> primitiveToObjectType(Class<?> javaType){
 
-    	if(javaType.isPrimitive()){
+    	if(javaType.isPrimitive() && javaType.getComponentType() != null){
     		if(javaType.getComponentType().getName().equals(Byte.class.getSimpleName().toLowerCase())){
     			
     		}else if(javaType.getComponentType().getName().equals(Character.class.getSimpleName().toLowerCase())){

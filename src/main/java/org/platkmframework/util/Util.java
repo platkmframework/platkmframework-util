@@ -489,5 +489,10 @@ public class Util {
     public static String multipartToString(InputStream inputStream) throws IOException {
     	return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
     }
+    
+	/*
+	 * public static void main(String[] a) {
+	 * System.out.println(randomCapsString(255)); }
+	 */
 	
 }

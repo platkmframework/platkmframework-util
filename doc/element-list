@@ -5,5 +5,6 @@ org.platkmframework.util.error.annotations
 org.platkmframework.util.io
 org.platkmframework.util.json
 org.platkmframework.util.manager
+org.platkmframework.util.proxy
 org.platkmframework.util.reflection
 org.platkmframework.util.tree
