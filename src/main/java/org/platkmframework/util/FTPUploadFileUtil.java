@@ -43,9 +43,9 @@ public class FTPUploadFileUtil {
 	/**
 	 * description: constructor
 	 */
-	public FTPUploadFileUtil() {
-		super();
-	}
+	  private FTPUploadFileUtil() {
+	    throw new IllegalStateException("ClassToJsonUtil class");
+	  }
 
 	/**
 	 * description: send ftp file

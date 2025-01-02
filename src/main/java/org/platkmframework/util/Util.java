@@ -58,9 +58,9 @@ public class Util {
 	/**
 	 * description: constructor
 	 */
-	public Util() {
-		super();
-	}
+	  private Util() {
+	    throw new IllegalStateException("ClassToJsonUtil class");
+	  }
 
 	/**
 	 * description: first upper case
@@ -241,7 +241,7 @@ public class Util {
 	 * @param stringComa: separator
 	 * @return long string
 	 */
-	public List<Long> stringColonToLongList(String stringComa){
+	public static List<Long> stringColonToLongList(String stringComa){
 		
 		if(StringUtils.isEmpty(stringComa)) return null;
 		
@@ -489,10 +489,7 @@ public class Util {
     public static String multipartToString(InputStream inputStream) throws IOException {
     	return IOUtils.toString(inputStream, StandardCharsets.UTF_8.name());
     }
-    
-	/*
-	 * public static void main(String[] a) {
-	 * System.out.println(randomCapsString(255)); }
-	 */
+ 
+	  
 	
 }

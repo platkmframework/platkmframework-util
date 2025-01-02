@@ -15,22 +15,25 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-
+/**
+ *  Class To Json Util
+ */
 public class ClassToJsonUtil {
 
-	
-	/**public static String process(Class<?> pclass) {
-		try {
-			return JsonUtil.objectToJson(classToAttributeTypeMap(pclass));
-		} catch (JsonException e) { 
-			e.printStackTrace();
-		}
-		return "";
-	}
-	*/
-	
+	/**
+	 * ClassToJsonUtil
+	 */
+	  private ClassToJsonUtil() {
+	    throw new IllegalStateException("ClassToJsonUtil class");
+	  }
+	  
+	/**
+	 * 
+	 * @param pclass class to process
+	 * @return List map
+	 * @throws JsonException Json Exception
+	 */
 	public static List<Map<String, Object>> process(Class<?> pclass) throws JsonException{
-		//Map<String, Object> result = new HashMap<>();
 		List<Map<String, Object>> results = new ArrayList<>();
 		results.add(new HashMap<>());
 		results.add(new HashMap<>());
@@ -48,7 +51,6 @@ public class ClassToJsonUtil {
 					children = process(field.getType().getComponentType());
 					results.get(0).put(field.getName(), new Object[] {children.get(0)});
 					results.get(1).put(field.getName(), new Object[] {children.get(1)});
-					//result.put(field.getName(), new Object[] {classToAttributeTypeMap(field.getType().getComponentType())});
 					
 				}else if(field.getType().isPrimitive()) {
 					
@@ -70,7 +72,6 @@ public class ClassToJsonUtil {
 						children = process((Class)((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
 						results.get(0).put(field.getName(), new Object[] {children.get(0)});
 						results.get(1).put(field.getName(), new Object[] {children.get(1)});
-						//result.put(field.getName(), new Object[] {classToAttributeTypeMap((Class)((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0])});
 					
 					}else{
 						

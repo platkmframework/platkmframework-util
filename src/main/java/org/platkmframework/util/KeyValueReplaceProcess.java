@@ -38,9 +38,9 @@ public class KeyValueReplaceProcess {
 	/**
 	 * description: constructor
 	 */
-	public KeyValueReplaceProcess() {
-		super();
-	}
+	  private KeyValueReplaceProcess() {
+	    throw new IllegalStateException("ClassToJsonUtil class");
+	  }
 
 	/**
 	   * description: process string from map key value

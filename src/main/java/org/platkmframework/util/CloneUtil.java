@@ -34,6 +34,7 @@ import org.dozer.Mapper;
 import org.platkmframework.util.error.InvocationException;
 import org.platkmframework.util.reflection.ReflectionUtil;
   
+
 /** 
  *   description: Clone util
  * 	 @author  Eduardo Iglesias
@@ -54,16 +55,15 @@ public class CloneUtil {
     /**
      * description: constructor
      */
-    private CloneUtil() {
-		super(); 
-	}
+	  private CloneUtil() {
+	    throw new IllegalStateException("ClassToJsonUtil class");
+	  }
 
 	/**
      * Description: clone function
-     * @param <E>: clone result
-     * @param source: source object
+     * @param targetClass: clone result
      * @param cloneListsWithoutSet: clone list without set method
-     * @param class1: class to clone
+     * @param sourceObject: source object 
      * @return cloned object
      */
     public static <E> E clone(Object sourceObject, boolean cloneListsWithoutSet, Class<E> targetClass) {
@@ -106,6 +106,14 @@ public class CloneUtil {
         return targetObject; 
     }
 
+    /**
+     * 
+     * @param sourceField source filed
+     * @param sourceObject source object
+     * @param targetField target field
+     * @param targetObject target object 
+     * @throws InvocationException
+     */
     private static void setFieldValue(Field sourceField, Object sourceObject, Field targetField, Object targetObject) throws InvocationException {
 	    try {
 	    	
@@ -126,6 +134,13 @@ public class CloneUtil {
 		
 	}
 
+    /**
+     * 
+     * @param fieldName field name
+     * @param targetObject target object
+     * @return
+     * @throws InvocationException
+     */
 	private static boolean targetObjectContainGETandSetMethod(String fieldName, Object targetObject) throws InvocationException {
     	String fieldFirtUpperCase = Util.firstUpperCase(fieldName);
     	return ReflectionUtil.exsitsMethod(targetObject, "set" + fieldFirtUpperCase) &&
@@ -152,7 +167,7 @@ public class CloneUtil {
     /**
      * description: clone function
      * @param <E> : object clone result
-     * @param source: soure
+     * @param source: source
      * @param class1: class result
      * @return  cloned object
      */
@@ -162,8 +177,8 @@ public class CloneUtil {
 	
     /**
      * description: clone function
-     * @param source
-     * @param target
+     * @param source source object
+     * @param target  target object
      */
 	public static void clone(Object source, Object target) {
 		mapper.map(source, target);

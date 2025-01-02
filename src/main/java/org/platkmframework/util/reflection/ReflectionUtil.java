@@ -23,13 +23,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List; 
 
 import org.apache.commons.lang3.StringUtils;
 import org.platkmframework.util.Util;
-import org.platkmframework.util.error.InvocationException; 
+import org.platkmframework.util.error.InvocationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
  
 /**
  *   Author: 
@@ -40,7 +40,7 @@ import org.platkmframework.util.error.InvocationException;
  */
 public class ReflectionUtil {
 
-	private final static Logger LOGGER = Logger.getLogger("com.gacelaenvironment.domain.dao.base.BaseDao");
+	private static Logger logger = LoggerFactory.getLogger(ReflectionUtil.class);
 	
 	
 	
@@ -288,10 +288,10 @@ public class ReflectionUtil {
     
    /**
     * description: get method
+    * @param field: field
     * @param object: object
-    * @param methodName: method name
     * @return method
-    * @throws InvocationException - error
+    * @throws InvocationException  Invocation Exception
     */
    public static Method getAtributeGETmethod(Object object, Field field ) throws InvocationException { 
          
@@ -311,10 +311,10 @@ public class ReflectionUtil {
     
    /**
     * description: get attribute value
-    * @param object: object
     * @param attributeName: attribute name
-    * @return value
-    * @throws Exception - error
+    * @param object: object
+    * @return attribute value
+    * @throws Exception Exception
     */
     public static Object getAttributeValue(Object object, String attributeName ) throws Exception 
     { 
@@ -376,9 +376,7 @@ public class ReflectionUtil {
      * description: set attribute value
      * @param object: object
      * @param attributeName: attribute name
-     * @param value : value
-     * @param dateFormat: date format
-     * @param dateTimeFormat: datetime format
+     * @param value : value 
      * @throws InvocationException - error
      */
     public static void setAttributeValue(Object object, String attributeName, Object value) throws InvocationException {
@@ -403,9 +401,7 @@ public class ReflectionUtil {
      * description: set attribute value
      * @param object: object
      * @param field: field
-     * @param value: value
-     * @param dateFormat: date format
-     * @param dateTimeFormat: date time format
+     * @param value: value  
      * @throws InvocationException 
      */
     public static void setAttributeValue(Object object, Field field, Object value) throws InvocationException {
@@ -417,9 +413,7 @@ public class ReflectionUtil {
      * @param object: object
      * @param field: field
      * @param value: value
-     * @param withtype: whether check type
-     * @param dateFormat: date format
-     * @param dateTimeFormat: date time format
+     * @param withtype: whether check type 
      * @throws InvocationException 
      */
     public static void setAttributeValue(Object object, Field field, Object value, boolean withtype ) throws InvocationException 
@@ -518,7 +512,7 @@ public class ReflectionUtil {
     		
 		} catch ( SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			//throw new ReflectionError(e.getMessage());
-			LOGGER.log(Level.WARNING, "-->column not found " + e.getMessage()); 
+			logger.warn( "-->column not found " + e.getMessage()); 
 		}	 
     }
  
@@ -527,7 +521,7 @@ public class ReflectionUtil {
 	 * description: get attribute value
 	 * @param field: field
 	 * @param value: value
-	 * @return object
+	 * @return object field value
 	 * @throws InvocationException - error
 	 */
     public static Object getRealAttributeValue(Field field, Object value) throws InvocationException 
@@ -557,12 +551,19 @@ public class ReflectionUtil {
             return null;
 		} catch (SecurityException | IllegalArgumentException e) {
 			//throw new ReflectionError(e.getMessage());
-			LOGGER.log(Level.SEVERE, "-->column not found " + e.getMessage());
+			logger.error( "-->column not found " + e.getMessage());
 			throw new InvocationException("error reflection value");
 		} 
     	 
     }
     
+    /**
+     * get Real Primitive Value
+     * @param javaClassType class type
+     * @param value value
+     * @return real value from field
+     * @throws InvocationException Invocation Exception
+     */
     public static Object getRealPrimitiveValue(Class<?>  javaClassType, Object value) throws InvocationException 
     {
     	try 
@@ -592,7 +593,7 @@ public class ReflectionUtil {
             return value;
 		} catch (SecurityException | IllegalArgumentException e) {
 			//throw new ReflectionError(e.getMessage());
-			LOGGER.log(Level.SEVERE, "-->column not found " + e.getMessage());
+			logger.error("-->column not found " + e.getMessage());
 			throw new InvocationException("error reflection value");
 		} 
     	 
@@ -602,7 +603,7 @@ public class ReflectionUtil {
      * description: get real value from field
      * @param field: field
      * @param value: value
-     * @return value
+     * @return value real value
      */
     public static Object getRealValueFromField(Field field, Object value){
     
@@ -631,6 +632,11 @@ public class ReflectionUtil {
         return returnValue;
     }
     
+    /**
+     * 
+     * @param classType class type
+     * @return whether primitive
+     */
     public static boolean isPrimitiveType(Class<?> classType){
     	
     	return classType.isAssignableFrom(Byte.class) ||
@@ -643,6 +649,11 @@ public class ReflectionUtil {
                 classType.isAssignableFrom(Boolean.class);
     }
     
+    /**
+     * primitive To Object Type
+     * @param javaType class tpe
+     * @return
+     */
     public static Class<?> primitiveToObjectType(Class<?> javaType){
 
     	if(javaType.isPrimitive() && javaType.getComponentType() != null){
@@ -676,7 +687,7 @@ public class ReflectionUtil {
      * @param method: method
      * @param args: arguments
      * @return object
-     * @throws InvocationException - error
+     * @throws InvocationException  Invocation Exception
      */
 	public static Object invokeMethod(Object ob, Method method,  Object[] args) throws InvocationException 
 	{
@@ -733,7 +744,7 @@ public class ReflectionUtil {
 	
 	
 	/**
-	 * 
+	 *  get All Methodd Heritage
 	 * @param class1
 	 * @return
 	 */
@@ -744,7 +755,7 @@ public class ReflectionUtil {
 	
 	
 	/**
-	 * 
+	 * get All Method Heritage
 	 * @param class1
 	 * @param excludeStatic
 	 * @return
@@ -766,6 +777,13 @@ public class ReflectionUtil {
 		return listMethods; 
 	}
 	
+	/**
+	 * get Method By Name And Heritage
+	 * @param class1
+	 * @param methodName
+	 * @param excludeStatic
+	 * @return
+	 */
 	public static Method getMethodByNameAndHeritage(Class<?> class1, String methodName, boolean excludeStatic)
 	{ 
 		Method[] methods = class1.getDeclaredMethods();
@@ -779,7 +797,7 @@ public class ReflectionUtil {
 		if(superC != null)
 			return getMethodByNameAndHeritage(superC, methodName, excludeStatic);
 		else
-		return null; 
+			return null; 
 	}
 	
 }

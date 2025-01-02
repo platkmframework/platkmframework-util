@@ -31,10 +31,17 @@ public class DataTypeUtil {
 	/**
 	 * description: default constructor
 	 */
-	public DataTypeUtil() {
-		super();
-	}
+	  private DataTypeUtil() {
+	    throw new IllegalStateException("ClassToJsonUtil class");
+	  }
 	
+	/**
+	 * 
+	 * convert to String Value
+	 * @param value value to convert to string
+	 * @param defaultValue default value
+	 * @return
+	 */
 	public static String getStringValue(Object value, String defaultValue) {
 		return (value != null && StringUtils.isNotBlank(value.toString()))?value.toString():defaultValue; 
 	}
