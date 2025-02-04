@@ -39,7 +39,7 @@ public class KeyValueReplaceProcess {
 	 * description: constructor
 	 */
 	  private KeyValueReplaceProcess() {
-	    throw new IllegalStateException("ClassToJsonUtil class");
+	    throw new IllegalStateException("KeyValueReplaceProcess class");
 	  }
 
 	/**

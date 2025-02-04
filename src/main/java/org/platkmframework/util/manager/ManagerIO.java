@@ -22,10 +22,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.bind.JAXBException;
-
 import org.apache.commons.io.FileUtils;
 import org.platkmframework.util.io.ModelIO;
+
+import jakarta.xml.bind.JAXBException;
  
 /**
  *   Author: 

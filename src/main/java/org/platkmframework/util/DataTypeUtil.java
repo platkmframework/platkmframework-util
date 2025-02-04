@@ -32,7 +32,7 @@ public class DataTypeUtil {
 	 * description: default constructor
 	 */
 	  private DataTypeUtil() {
-	    throw new IllegalStateException("ClassToJsonUtil class");
+	    throw new IllegalStateException("KeyValueReplaceProcess class");
 	  }
 	
 	/**

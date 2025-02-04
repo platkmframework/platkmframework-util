@@ -59,7 +59,7 @@ public class Util {
 	 * description: constructor
 	 */
 	  private Util() {
-	    throw new IllegalStateException("ClassToJsonUtil class");
+	    throw new IllegalStateException("Util class");
 	  }
 
 	/**

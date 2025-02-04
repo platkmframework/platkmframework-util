@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
+import com.github.dozermapper.core.Mapper;
 import org.platkmframework.util.error.InvocationException;
 import org.platkmframework.util.reflection.ReflectionUtil;
   
@@ -45,18 +45,13 @@ public class CloneUtil {
 	/**
 	 * description: mapper
 	 */
-    public static Mapper mapper;
-
-    static {
+    public static Mapper mapper = DozerBeanMapperBuilder.buildDefault();
  
-        mapper = new DozerBeanMapper();
-    }
-
     /**
      * description: constructor
      */
 	  private CloneUtil() {
-	    throw new IllegalStateException("ClassToJsonUtil class");
+		  throw new IllegalStateException("ClassToJsonUtil class");
 	  }
 
 	/**

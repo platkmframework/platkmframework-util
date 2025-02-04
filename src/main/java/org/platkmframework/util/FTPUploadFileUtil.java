@@ -44,7 +44,7 @@ public class FTPUploadFileUtil {
 	 * description: constructor
 	 */
 	  private FTPUploadFileUtil() {
-	    throw new IllegalStateException("ClassToJsonUtil class");
+	    throw new IllegalStateException("KeyValueReplaceProcess class");
 	  }
 
 	/**
