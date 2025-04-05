@@ -800,4 +800,19 @@ public class ReflectionUtil {
 			return null; 
 	}
 	
+	/**
+	 * findMethod 
+	 * @param clazz
+	 * @param methodName
+	 * @param paramTypes
+	 * @return
+	 */
+	public static Method findMethod(Class<?> clazz, String methodName, Class<?>... paramTypes) {
+        try {
+            return clazz.getDeclaredMethod(methodName, paramTypes);
+        } catch (NoSuchMethodException e) {
+            return null; 
+        }
+    }
+	
 }
